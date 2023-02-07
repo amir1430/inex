@@ -1,16 +1,11 @@
 # inex
 
-A new Flutter project.
+A Flutter app for managing income and expenses
 
-## Getting Started
+------------
 
-This project is a starting point for a Flutter application.
+**State managment**: Bloc
 
-A few resources to get you started if this is your first Flutter project:
+**Database**: Isar
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Route**r: GoRouter
