@@ -7,6 +7,8 @@ part of 'transaction.dart';
 // **************************************************************************
 
 abstract class _$TransactionCWProxy {
+  Transaction id(int id);
+
   Transaction time(int time);
 
   Transaction amount(int amount);
@@ -24,6 +26,7 @@ abstract class _$TransactionCWProxy {
   /// Transaction(...).copyWith(id: 12, name: "My name")
   /// ````
   Transaction call({
+    int? id,
     int? time,
     int? amount,
     String? title,
@@ -37,6 +40,9 @@ class _$TransactionCWProxyImpl implements _$TransactionCWProxy {
   const _$TransactionCWProxyImpl(this._value);
 
   final Transaction _value;
+
+  @override
+  Transaction id(int id) => this(id: id);
 
   @override
   Transaction time(int time) => this(time: time);
@@ -62,6 +68,7 @@ class _$TransactionCWProxyImpl implements _$TransactionCWProxy {
   /// Transaction(...).copyWith(id: 12, name: "My name")
   /// ````
   Transaction call({
+    Object? id = const $CopyWithPlaceholder(),
     Object? time = const $CopyWithPlaceholder(),
     Object? amount = const $CopyWithPlaceholder(),
     Object? title = const $CopyWithPlaceholder(),
@@ -69,6 +76,11 @@ class _$TransactionCWProxyImpl implements _$TransactionCWProxy {
     Object? type = const $CopyWithPlaceholder(),
   }) {
     return Transaction(
+      id: id == const $CopyWithPlaceholder() || id == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.id!
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
       time: time == const $CopyWithPlaceholder() || time == null
           // ignore: unnecessary_non_null_assertion
           ? _value.time!
@@ -213,12 +225,12 @@ Transaction _transactionDeserialize(
   final object = Transaction(
     amount: reader.readLong(offsets[0]),
     description: reader.readStringOrNull(offsets[1]) ?? '',
+    id: id,
     time: reader.readLong(offsets[4]),
     title: reader.readString(offsets[5]),
     type: _TransactiontypeValueEnumMap[reader.readByteOrNull(offsets[6])] ??
         TransactionType.income,
   );
-  object.id = id;
   return object;
 }
 
@@ -268,7 +280,6 @@ List<IsarLinkBase<dynamic>> _transactionGetLinks(Transaction object) {
 
 void _transactionAttach(
     IsarCollection<dynamic> col, Id id, Transaction object) {
-  object.id = id;
   object.place.attach(col, col.isar.collection<Place>(), r'place', id);
 }
 
@@ -1219,30 +1230,3 @@ extension TransactionQueryProperty
     });
   }
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
-      time: json['time'] as int,
-      amount: json['amount'] as int,
-      title: json['title'] as String,
-      description: json['description'] as String? ?? '',
-      type: $enumDecode(_$TransactionTypeEnumMap, json['type']),
-    )..id = json['id'] as int;
-
-Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'time': instance.time,
-      'amount': instance.amount,
-      'title': instance.title,
-      'description': instance.description,
-      'type': _$TransactionTypeEnumMap[instance.type]!,
-    };
-
-const _$TransactionTypeEnumMap = {
-  TransactionType.income: 'income',
-  TransactionType.expenses: 'expenses',
-};

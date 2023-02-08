@@ -50,6 +50,7 @@ class AddPlaceCubit extends Cubit<AddPlaceState> {
     try {
       await dataSource.addPlace(
         Place(
+          id: DateTime.now().millisecondsSinceEpoch,
           name: state.nameForm.value,
           description: state.descriptionForm.value,
           createdAt: now,
@@ -75,7 +76,8 @@ class AddPlaceCubit extends Cubit<AddPlaceState> {
           editedAt: DateTime.now().millisecondsSinceEpoch,
           name: state.nameForm.value,
           description: state.descriptionForm.value,
-        )..id = state.id!,
+          id: state.id,
+        ),
       );
       emit(state.copyWith(formzStatus: FormzStatus.submissionSuccess));
     } catch (e) {

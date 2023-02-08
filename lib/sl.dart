@@ -15,10 +15,13 @@ Future<void> initSl() async {
     ..registerSingleton<Isar>(
       await Isar.open([PlaceSchema, TransactionSchema]),
     )
+    ..registerSingleton<IIoDataSource>(IoDataSourceImpl())
     ..registerSingleton<IDataSource>(IsarDataSource(isar: sl()))
     ..registerFactory<PlacesBloc>(() => PlacesBloc(sl()))
     ..registerFactory<PlaceBloc>(() => PlaceBloc(sl()))
-    ..registerFactory<AppBloc>(AppBloc.new)
+    ..registerFactory<AppBloc>(
+      () => AppBloc(dataSource: sl(), ioDataSource: sl()),
+    )
     ..registerFactory<TransactionsBloc>(
       () => TransactionsBloc(dataSource: sl()),
     )

@@ -1,16 +1,147 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:inex/data_source/data_source.dart';
+import 'package:inex/exceptions/exceptions.dart';
 import 'package:inex/utils/currency_format.dart';
+import 'package:inex/utils/time.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 part 'app_bloc.freezed.dart';
-part 'app_bloc.g.dart';
 
 class AppBloc extends HydratedBloc<AppEvent, AppState> {
-  AppBloc() : super(const AppState()) {
+  AppBloc({
+    required this.dataSource,
+    required this.ioDataSource,
+  }) : super(const AppState()) {
+    on<_Import>(_onImport);
+    on<_Export>(_onExport);
     on<_ChangeTheme>(_onChangeTheme);
     on<_ChangeCurrenyFormat>(_onChangeCurrenyFormat);
+  }
+
+  final IDataSource dataSource;
+  final IIoDataSource ioDataSource;
+
+  Future<void> _onImport(
+    _Import event,
+    Emitter<AppState> emit,
+  ) async {
+    emit(state.copyWith(importingStatus: ImportingStatus.inProgress));
+    try {
+      final pickedFile = await ioDataSource.pickFile();
+
+      if (pickedFile != null && pickedFile.path != null) {
+        final data =
+            await ioDataSource.readFileAsString(path: pickedFile.path!);
+
+        if (data == null) {
+          throw const ReadingFileException();
+        }
+
+        final counter =
+            await dataSource.import(json.decode(data) as Map<String, dynamic>);
+
+        emit(
+          state.copyWith(
+            importingStatus: ImportingStatus.done,
+            importMessage: 'Imported '
+                '${counter.placesSuccessCount} of ${counter.placesTotalCount}'
+                ' Places and ${counter.transactionsSuccessCount} of '
+                '${counter.transactionsTotalCount} Transactions',
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            importingStatus: ImportingStatus.initial,
+            importMessage: null,
+            errorMessage: null,
+          ),
+        );
+      }
+    } on ReadingJsonException catch (e) {
+      emit(
+        state.copyWith(
+          importingStatus: ImportingStatus.failure,
+          errorMessage: e.message,
+        ),
+      );
+    } on ReadingFileException catch (e) {
+      emit(
+        state.copyWith(
+          importingStatus: ImportingStatus.failure,
+          errorMessage: e.message,
+        ),
+      );
+    } on FormatException catch (e) {
+      emit(
+        state.copyWith(
+          importingStatus: ImportingStatus.failure,
+          errorMessage: e.message,
+        ),
+      );
+    } finally {
+      emit(
+        state.copyWith(
+          importingStatus: ImportingStatus.initial,
+          importMessage: null,
+          errorMessage: null,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onExport(
+    _Export event,
+    Emitter<AppState> emit,
+  ) async {
+    final permissionStatus = await Permission.storage.status;
+    if (!permissionStatus.isGranted) {
+      await Permission.storage.request();
+    }
+
+    emit(state.copyWith(exportingStatus: ExportingStatus.inProgress));
+
+    try {
+      final filePath = await ioDataSource.getDirectory();
+
+      if (filePath != null) {
+        final data = await dataSource.export();
+
+        final savedFile = await ioDataSource.writeFileAsString(
+          path: filePath,
+          name: 'inex-back-up-${InexTime().timeMdyhms}',
+          fileType: IoFileType.json,
+          data: data,
+        );
+
+        emit(
+          state.copyWith(
+            exportingStatus: ExportingStatus.done,
+            exportPath: savedFile.path,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          exportingStatus: ExportingStatus.failure,
+          errorMessage: '$e',
+        ),
+      );
+    } finally {
+      emit(
+        state.copyWith(
+          exportingStatus: ExportingStatus.initial,
+          errorMessage: null,
+          exportPath: null,
+        ),
+      );
+    }
   }
 
   Future<void> _onChangeTheme(
@@ -28,8 +159,17 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
   }
 
   @override
-  AppState? fromJson(Map<String, dynamic> json) => AppState.fromJson(json);
+  AppState? fromJson(Map<String, dynamic> json) => AppState(
+        isThemeDark: json['isThemeDark'] as bool,
+        currencyFormat: CurrencyFormat.values.firstWhere(
+          (currency) => currency.name == json['currencyFormat'] as String,
+          orElse: () => CurrencyFormat.iranRial,
+        ),
+      );
 
   @override
-  Map<String, dynamic>? toJson(AppState state) => state.toJson();
+  Map<String, dynamic>? toJson(AppState state) => {
+        'isThemeDark': state.isThemeDark,
+        'currencyFormat': state.currencyFormat.name,
+      };
 }

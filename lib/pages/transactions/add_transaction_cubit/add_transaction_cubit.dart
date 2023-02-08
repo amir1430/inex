@@ -7,7 +7,6 @@ import 'package:inex/data_source/data_source.dart';
 import 'package:inex/data_source/model/transaction.dart';
 import 'package:inex/exceptions/exceptions.dart';
 import 'package:intl/intl.dart';
-
 part 'add_transaction_state.dart';
 part 'add_transaction_cubit.freezed.dart';
 
@@ -38,6 +37,7 @@ class AddTransactionCubit extends Cubit<AddTransactionState> {
 
       await dataSource.addtransaction(
         transaction: Transaction(
+          id: DateTime.now().microsecondsSinceEpoch,
           time: convertDateTimeToUnix(date: state.date, time: state.timeOfDay),
           amount: state.amount,
           title: state.nameForm.value,

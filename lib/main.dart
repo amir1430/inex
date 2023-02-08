@@ -33,11 +33,11 @@ class _App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<PlacesBloc>(
-          create: (context) => sl()..add(const PlacesEvent.started()),
-        ),
         BlocProvider<AppBloc>(
           create: (context) => sl(),
+        ),
+        BlocProvider<PlacesBloc>(
+          create: (context) => sl()..add(const PlacesEvent.started()),
         ),
         BlocProvider<TransactionsBloc>(
           create: (context) => sl()..add(const TransactionsEvent.started()),

@@ -5,6 +5,10 @@ class InexTime {
   static String unixToDay(int time) =>
       DateFormat.yMd().format(DateTime.fromMillisecondsSinceEpoch(time));
 
+  String get timeMdyhms {
+    return DateFormat('M-d-y-h-m-s').format(DateTime.now());
+  }
+
   static bool isInSameDay({required int first, required int second}) =>
       unixToDay(first) == unixToDay(second);
 }
