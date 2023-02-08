@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
     required TResult Function(bool isDark) changeTheme,
@@ -26,6 +27,7 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
     TResult? Function(bool isDark)? changeTheme,
@@ -34,6 +36,7 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
     TResult Function(bool isDark)? changeTheme,
@@ -43,6 +46,7 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
     required TResult Function(_ChangeTheme value) changeTheme,
@@ -51,6 +55,7 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
     TResult? Function(_ChangeTheme value)? changeTheme,
@@ -59,6 +64,7 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
     TResult Function(_ChangeTheme value)? changeTheme,
@@ -83,6 +89,124 @@ class _$AppEventCopyWithImpl<$Res, $Val extends AppEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_ShareCopyWith<$Res> {
+  factory _$$_ShareCopyWith(_$_Share value, $Res Function(_$_Share) then) =
+      __$$_ShareCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ShareCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$_Share>
+    implements _$$_ShareCopyWith<$Res> {
+  __$$_ShareCopyWithImpl(_$_Share _value, $Res Function(_$_Share) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Share implements _Share {
+  const _$_Share();
+
+  @override
+  String toString() {
+    return 'AppEvent.share()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Share);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() share,
+    required TResult Function() import,
+    required TResult Function() export,
+    required TResult Function(bool isDark) changeTheme,
+    required TResult Function(CurrencyFormat format) changeCurrenyFormat,
+  }) {
+    return share();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
+    TResult? Function()? import,
+    TResult? Function()? export,
+    TResult? Function(bool isDark)? changeTheme,
+    TResult? Function(CurrencyFormat format)? changeCurrenyFormat,
+  }) {
+    return share?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
+    TResult Function()? import,
+    TResult Function()? export,
+    TResult Function(bool isDark)? changeTheme,
+    TResult Function(CurrencyFormat format)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (share != null) {
+      return share();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
+    required TResult Function(_Import value) import,
+    required TResult Function(_Export value) export,
+    required TResult Function(_ChangeTheme value) changeTheme,
+    required TResult Function(_ChangeCurrenyFormat value) changeCurrenyFormat,
+  }) {
+    return share(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
+    TResult? Function(_Import value)? import,
+    TResult? Function(_Export value)? export,
+    TResult? Function(_ChangeTheme value)? changeTheme,
+    TResult? Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+  }) {
+    return share?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
+    TResult Function(_Import value)? import,
+    TResult Function(_Export value)? export,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (share != null) {
+      return share(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Share implements AppEvent {
+  const factory _Share() = _$_Share;
 }
 
 /// @nodoc
@@ -121,6 +245,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
     required TResult Function(bool isDark) changeTheme,
@@ -132,6 +257,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
     TResult? Function(bool isDark)? changeTheme,
@@ -143,6 +269,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
     TResult Function(bool isDark)? changeTheme,
@@ -158,6 +285,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
     required TResult Function(_ChangeTheme value) changeTheme,
@@ -169,6 +297,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
     TResult? Function(_ChangeTheme value)? changeTheme,
@@ -180,6 +309,7 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
     TResult Function(_ChangeTheme value)? changeTheme,
@@ -233,6 +363,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
     required TResult Function(bool isDark) changeTheme,
@@ -244,6 +375,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
     TResult? Function(bool isDark)? changeTheme,
@@ -255,6 +387,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
     TResult Function(bool isDark)? changeTheme,
@@ -270,6 +403,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
     required TResult Function(_ChangeTheme value) changeTheme,
@@ -281,6 +415,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
     TResult? Function(_ChangeTheme value)? changeTheme,
@@ -292,6 +427,7 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
     TResult Function(_ChangeTheme value)? changeTheme,
@@ -373,6 +509,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
     required TResult Function(bool isDark) changeTheme,
@@ -384,6 +521,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
     TResult? Function(bool isDark)? changeTheme,
@@ -395,6 +533,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
     TResult Function(bool isDark)? changeTheme,
@@ -410,6 +549,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
     required TResult Function(_ChangeTheme value) changeTheme,
@@ -421,6 +561,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
     TResult? Function(_ChangeTheme value)? changeTheme,
@@ -432,6 +573,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
     TResult Function(_ChangeTheme value)? changeTheme,
@@ -519,6 +661,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
     required TResult Function(bool isDark) changeTheme,
@@ -530,6 +673,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
     TResult? Function(bool isDark)? changeTheme,
@@ -541,6 +685,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
     TResult Function(bool isDark)? changeTheme,
@@ -556,6 +701,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
     required TResult Function(_ChangeTheme value) changeTheme,
@@ -567,6 +713,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
     TResult? Function(_ChangeTheme value)? changeTheme,
@@ -578,6 +725,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
     TResult Function(_ChangeTheme value)? changeTheme,

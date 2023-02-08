@@ -136,6 +136,13 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
                       );
                     },
                   ),
+                  TextButton.icon(
+                    onPressed: () async {
+                      context.read<AppBloc>().add(const AppEvent.share());
+                    },
+                    icon: const Icon(Icons.share_rounded),
+                    label: const Text('share'),
+                  )
                 ],
               )
             ],

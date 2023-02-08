@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -6,7 +7,9 @@ import 'package:inex/data_source/data_source.dart';
 import 'package:inex/exceptions/exceptions.dart';
 import 'package:inex/utils/currency_format.dart';
 import 'package:inex/utils/time.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
@@ -17,6 +20,7 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
     required this.dataSource,
     required this.ioDataSource,
   }) : super(const AppState()) {
+    on<_Share>(_onShare);
     on<_Import>(_onImport);
     on<_Export>(_onExport);
     on<_ChangeTheme>(_onChangeTheme);
@@ -25,6 +29,25 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
 
   final IDataSource dataSource;
   final IIoDataSource ioDataSource;
+
+  Future<void> _onShare(
+    _Share event,
+    Emitter<AppState> emit,
+  ) async {
+    try {
+      final path = await getApplicationDocumentsDirectory();
+      final data = await dataSource.export();
+      final file = await ioDataSource.writeFileAsString(
+        path: path.path,
+        name: 'inex-back-up-${InexTime().timeMdyhms}',
+        fileType: IoFileType.json,
+        data: data,
+      );
+      await Share.shareXFiles([XFile(file.path)]);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 
   Future<void> _onImport(
     _Import event,
