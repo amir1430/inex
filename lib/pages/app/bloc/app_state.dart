@@ -11,6 +11,8 @@ class AppState with _$AppState {
     @Default(CurrencyFormat.iranRial) CurrencyFormat currencyFormat,
     @Default(ExportingStatus.initial) ExportingStatus exportingStatus,
     @Default(ImportingStatus.initial) ImportingStatus importingStatus,
+    @Default(AuthenticationStatus.initial())
+        AuthenticationStatus authenticationStatus,
     String? importMessage,
     String? exportPath,
     String? errorMessage,

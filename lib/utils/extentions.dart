@@ -52,8 +52,6 @@ extension BuildContextX on BuildContext {
         return SlideTransition(
           position: animation.drive(tween),
           child: Dialog(
-            insetPadding:
-                MediaQuery.of(context).viewInsets.copyWith(right: 40, left: 40),
             child: Padding(
               padding: const EdgeInsets.only(
                 right: 16,

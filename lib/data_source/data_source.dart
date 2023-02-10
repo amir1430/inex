@@ -6,6 +6,7 @@ import 'package:inex/exceptions/exceptions.dart';
 import 'package:isar/isar.dart';
 
 export 'io_data_source.dart';
+export 'authentication_data_source.dart';
 
 abstract class IDataSource {
   Future<int> addPlace(Place place);

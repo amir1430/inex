@@ -19,7 +19,23 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
   AppBloc({
     required this.dataSource,
     required this.ioDataSource,
+    required this.authenticationDataSource,
   }) : super(const AppState()) {
+    on<_Started>(
+      (event, emit) async {
+        await emit.forEach(
+          authenticationDataSource.authStatus(),
+          onData: (data) {
+            return state.copyWith(authenticationStatus: data);
+          },
+        );
+      },
+    );
+    on<_SignOut>(
+      (event, emit) async {
+        await authenticationDataSource.logOut();
+      },
+    );
     on<_Share>(_onShare);
     on<_Import>(_onImport);
     on<_Export>(_onExport);
@@ -29,6 +45,7 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
 
   final IDataSource dataSource;
   final IIoDataSource ioDataSource;
+  final AuthenticationDataSource authenticationDataSource;
 
   Future<void> _onShare(
     _Share event,

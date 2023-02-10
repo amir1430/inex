@@ -74,18 +74,11 @@ class _PlaceView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add_card),
-        onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            isScrollControlled: true,
-            builder: (context) {
-              return Padding(
-                padding: MediaQuery.of(context).viewInsets,
-                child: AddTransactionView(
-                  placeId: placeId,
-                ),
-              );
-            },
+        onPressed: () async {
+          await context.showModal(
+            child: AddTransactionView(
+              placeId: placeId,
+            ),
           );
         },
       ),

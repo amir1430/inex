@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inex/pages/app/app.dart';
+import 'package:inex/pages/authentication/authentication.dart';
 import 'package:inex/utils/utils.dart';
+import 'package:inex/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.child});
@@ -45,7 +47,9 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
               current.exportingStatus == ExportingStatus.done,
           listener: (context, state) {
             closeDrawer();
-            showSnackbar(content: Text('BackUp saved to: ${state.exportPath}'));
+            context.showSnackbar(
+              content: Text('BackUp saved to: ${state.exportPath}'),
+            );
           },
         ),
         BlocListener<AppBloc, AppState>(
@@ -54,12 +58,12 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
           listener: (context, state) {
             if (state.importingStatus == ImportingStatus.done) {
               closeDrawer();
-              showSnackbar(content: Text(state.importMessage ?? ''));
+              context.showSnackbar(content: Text(state.importMessage ?? ''));
             }
 
             if (state.importingStatus == ImportingStatus.failure) {
               closeDrawer();
-              showSnackbar(
+              context.showSnackbar(
                 content: Text(state.errorMessage ?? ''),
                 color: Colors.red,
               );
@@ -73,7 +77,7 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
           title: const Text('Inex'),
         ),
         drawer: Drawer(
-          child: ListView(
+          child: Column(
             children: [
               const SizedBox(height: 20),
               BlocBuilder<AppBloc, AppState>(
@@ -144,7 +148,67 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
                     label: const Text('share'),
                   )
                 ],
-              )
+              ),
+              const Spacer(),
+              Builder(
+                builder: (context) {
+                  return BlocBuilder<AppBloc, AppState>(
+                    builder: (context, state) {
+                      return state.authenticationStatus.when(
+                        initial: SizedBox.new,
+                        unAuthenticated: () {
+                          return Align(
+                            child: TextButton.icon(
+                              onPressed: () async {
+                                await context.showGDialog(
+                                  begin: const Offset(-1, 1),
+                                  child: const AuthenticationView(),
+                                );
+                              },
+                              icon: const Icon(Icons.person_outline_outlined),
+                              label: const Text('Login'),
+                            ),
+                          );
+                        },
+                        authenticated: (email) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Row(
+                              children: [
+                                const Spacer(),
+                                SizedBox(
+                                  height: 46,
+                                  width: 2,
+                                  child: Container(
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    showConfirmDialog(
+                                      context,
+                                      title: 'Are you sure?',
+                                      confirmText: 'Logout me',
+                                      onConfirm: () {
+                                        context
+                                            .read<AppBloc>()
+                                            .add(const AppEvent.signOut());
+                                      },
+                                    );
+                                  },
+                                  icon: const Icon(Icons.logout_rounded),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 24),
             ],
           ),
         ),

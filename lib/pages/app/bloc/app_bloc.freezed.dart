@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -27,6 +29,8 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -36,6 +40,8 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -46,6 +52,8 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -55,6 +63,8 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -64,6 +74,8 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -89,6 +101,268 @@ class _$AppEventCopyWithImpl<$Res, $Val extends AppEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_StartedCopyWith<$Res> {
+  factory _$$_StartedCopyWith(
+          _$_Started value, $Res Function(_$_Started) then) =
+      __$$_StartedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StartedCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$_Started>
+    implements _$$_StartedCopyWith<$Res> {
+  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Started implements _Started {
+  const _$_Started();
+
+  @override
+  String toString() {
+    return 'AppEvent.started()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Started);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
+    required TResult Function() share,
+    required TResult Function() import,
+    required TResult Function() export,
+    required TResult Function(bool isDark) changeTheme,
+    required TResult Function(CurrencyFormat format) changeCurrenyFormat,
+  }) {
+    return started();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
+    TResult? Function()? share,
+    TResult? Function()? import,
+    TResult? Function()? export,
+    TResult? Function(bool isDark)? changeTheme,
+    TResult? Function(CurrencyFormat format)? changeCurrenyFormat,
+  }) {
+    return started?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
+    TResult Function()? share,
+    TResult Function()? import,
+    TResult Function()? export,
+    TResult Function(bool isDark)? changeTheme,
+    TResult Function(CurrencyFormat format)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (started != null) {
+      return started();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Share value) share,
+    required TResult Function(_Import value) import,
+    required TResult Function(_Export value) export,
+    required TResult Function(_ChangeTheme value) changeTheme,
+    required TResult Function(_ChangeCurrenyFormat value) changeCurrenyFormat,
+  }) {
+    return started(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Share value)? share,
+    TResult? Function(_Import value)? import,
+    TResult? Function(_Export value)? export,
+    TResult? Function(_ChangeTheme value)? changeTheme,
+    TResult? Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+  }) {
+    return started?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
+    TResult Function(_Share value)? share,
+    TResult Function(_Import value)? import,
+    TResult Function(_Export value)? export,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (started != null) {
+      return started(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Started implements AppEvent {
+  const factory _Started() = _$_Started;
+}
+
+/// @nodoc
+abstract class _$$_SignOutCopyWith<$Res> {
+  factory _$$_SignOutCopyWith(
+          _$_SignOut value, $Res Function(_$_SignOut) then) =
+      __$$_SignOutCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SignOutCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$_SignOut>
+    implements _$$_SignOutCopyWith<$Res> {
+  __$$_SignOutCopyWithImpl(_$_SignOut _value, $Res Function(_$_SignOut) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_SignOut implements _SignOut {
+  const _$_SignOut();
+
+  @override
+  String toString() {
+    return 'AppEvent.signOut()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_SignOut);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
+    required TResult Function() share,
+    required TResult Function() import,
+    required TResult Function() export,
+    required TResult Function(bool isDark) changeTheme,
+    required TResult Function(CurrencyFormat format) changeCurrenyFormat,
+  }) {
+    return signOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
+    TResult? Function()? share,
+    TResult? Function()? import,
+    TResult? Function()? export,
+    TResult? Function(bool isDark)? changeTheme,
+    TResult? Function(CurrencyFormat format)? changeCurrenyFormat,
+  }) {
+    return signOut?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
+    TResult Function()? share,
+    TResult Function()? import,
+    TResult Function()? export,
+    TResult Function(bool isDark)? changeTheme,
+    TResult Function(CurrencyFormat format)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (signOut != null) {
+      return signOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Share value) share,
+    required TResult Function(_Import value) import,
+    required TResult Function(_Export value) export,
+    required TResult Function(_ChangeTheme value) changeTheme,
+    required TResult Function(_ChangeCurrenyFormat value) changeCurrenyFormat,
+  }) {
+    return signOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Share value)? share,
+    TResult? Function(_Import value)? import,
+    TResult? Function(_Export value)? export,
+    TResult? Function(_ChangeTheme value)? changeTheme,
+    TResult? Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+  }) {
+    return signOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
+    TResult Function(_Share value)? share,
+    TResult Function(_Import value)? import,
+    TResult Function(_Export value)? export,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (signOut != null) {
+      return signOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignOut implements AppEvent {
+  const factory _SignOut() = _$_SignOut;
 }
 
 /// @nodoc
@@ -127,6 +401,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -139,6 +415,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -151,6 +429,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -167,6 +447,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -179,6 +461,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -191,6 +475,8 @@ class _$_Share implements _Share {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -245,6 +531,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -257,6 +545,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -269,6 +559,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -285,6 +577,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -297,6 +591,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -309,6 +605,8 @@ class _$_Import implements _Import {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -363,6 +661,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -375,6 +675,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -387,6 +689,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -403,6 +707,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -415,6 +721,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -427,6 +735,8 @@ class _$_Export implements _Export {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -509,6 +819,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -521,6 +833,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -533,6 +847,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -549,6 +865,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -561,6 +879,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -573,6 +893,8 @@ class _$_ChangeTheme implements _ChangeTheme {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -661,6 +983,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -673,6 +997,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -685,6 +1011,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -701,6 +1029,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -713,6 +1043,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -725,6 +1057,8 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -755,6 +1089,8 @@ mixin _$AppState {
   CurrencyFormat get currencyFormat => throw _privateConstructorUsedError;
   ExportingStatus get exportingStatus => throw _privateConstructorUsedError;
   ImportingStatus get importingStatus => throw _privateConstructorUsedError;
+  AuthenticationStatus get authenticationStatus =>
+      throw _privateConstructorUsedError;
   String? get importMessage => throw _privateConstructorUsedError;
   String? get exportPath => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
@@ -774,9 +1110,12 @@ abstract class $AppStateCopyWith<$Res> {
       CurrencyFormat currencyFormat,
       ExportingStatus exportingStatus,
       ImportingStatus importingStatus,
+      AuthenticationStatus authenticationStatus,
       String? importMessage,
       String? exportPath,
       String? errorMessage});
+
+  $AuthenticationStatusCopyWith<$Res> get authenticationStatus;
 }
 
 /// @nodoc
@@ -796,6 +1135,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
     Object? currencyFormat = null,
     Object? exportingStatus = null,
     Object? importingStatus = null,
+    Object? authenticationStatus = null,
     Object? importMessage = freezed,
     Object? exportPath = freezed,
     Object? errorMessage = freezed,
@@ -817,6 +1157,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.importingStatus
           : importingStatus // ignore: cast_nullable_to_non_nullable
               as ImportingStatus,
+      authenticationStatus: null == authenticationStatus
+          ? _value.authenticationStatus
+          : authenticationStatus // ignore: cast_nullable_to_non_nullable
+              as AuthenticationStatus,
       importMessage: freezed == importMessage
           ? _value.importMessage
           : importMessage // ignore: cast_nullable_to_non_nullable
@@ -830,6 +1174,15 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthenticationStatusCopyWith<$Res> get authenticationStatus {
+    return $AuthenticationStatusCopyWith<$Res>(_value.authenticationStatus,
+        (value) {
+      return _then(_value.copyWith(authenticationStatus: value) as $Val);
+    });
   }
 }
 
@@ -845,9 +1198,13 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
       CurrencyFormat currencyFormat,
       ExportingStatus exportingStatus,
       ImportingStatus importingStatus,
+      AuthenticationStatus authenticationStatus,
       String? importMessage,
       String? exportPath,
       String? errorMessage});
+
+  @override
+  $AuthenticationStatusCopyWith<$Res> get authenticationStatus;
 }
 
 /// @nodoc
@@ -865,6 +1222,7 @@ class __$$_AppStateCopyWithImpl<$Res>
     Object? currencyFormat = null,
     Object? exportingStatus = null,
     Object? importingStatus = null,
+    Object? authenticationStatus = null,
     Object? importMessage = freezed,
     Object? exportPath = freezed,
     Object? errorMessage = freezed,
@@ -886,6 +1244,10 @@ class __$$_AppStateCopyWithImpl<$Res>
           ? _value.importingStatus
           : importingStatus // ignore: cast_nullable_to_non_nullable
               as ImportingStatus,
+      authenticationStatus: null == authenticationStatus
+          ? _value.authenticationStatus
+          : authenticationStatus // ignore: cast_nullable_to_non_nullable
+              as AuthenticationStatus,
       importMessage: freezed == importMessage
           ? _value.importMessage
           : importMessage // ignore: cast_nullable_to_non_nullable
@@ -910,6 +1272,7 @@ class _$_AppState implements _AppState {
       this.currencyFormat = CurrencyFormat.iranRial,
       this.exportingStatus = ExportingStatus.initial,
       this.importingStatus = ImportingStatus.initial,
+      this.authenticationStatus = const AuthenticationStatus.initial(),
       this.importMessage,
       this.exportPath,
       this.errorMessage});
@@ -927,6 +1290,9 @@ class _$_AppState implements _AppState {
   @JsonKey()
   final ImportingStatus importingStatus;
   @override
+  @JsonKey()
+  final AuthenticationStatus authenticationStatus;
+  @override
   final String? importMessage;
   @override
   final String? exportPath;
@@ -935,7 +1301,7 @@ class _$_AppState implements _AppState {
 
   @override
   String toString() {
-    return 'AppState(isThemeDark: $isThemeDark, currencyFormat: $currencyFormat, exportingStatus: $exportingStatus, importingStatus: $importingStatus, importMessage: $importMessage, exportPath: $exportPath, errorMessage: $errorMessage)';
+    return 'AppState(isThemeDark: $isThemeDark, currencyFormat: $currencyFormat, exportingStatus: $exportingStatus, importingStatus: $importingStatus, authenticationStatus: $authenticationStatus, importMessage: $importMessage, exportPath: $exportPath, errorMessage: $errorMessage)';
   }
 
   @override
@@ -951,6 +1317,8 @@ class _$_AppState implements _AppState {
                 other.exportingStatus == exportingStatus) &&
             (identical(other.importingStatus, importingStatus) ||
                 other.importingStatus == importingStatus) &&
+            (identical(other.authenticationStatus, authenticationStatus) ||
+                other.authenticationStatus == authenticationStatus) &&
             (identical(other.importMessage, importMessage) ||
                 other.importMessage == importMessage) &&
             (identical(other.exportPath, exportPath) ||
@@ -966,6 +1334,7 @@ class _$_AppState implements _AppState {
       currencyFormat,
       exportingStatus,
       importingStatus,
+      authenticationStatus,
       importMessage,
       exportPath,
       errorMessage);
@@ -983,6 +1352,7 @@ abstract class _AppState implements AppState {
       final CurrencyFormat currencyFormat,
       final ExportingStatus exportingStatus,
       final ImportingStatus importingStatus,
+      final AuthenticationStatus authenticationStatus,
       final String? importMessage,
       final String? exportPath,
       final String? errorMessage}) = _$_AppState;
@@ -995,6 +1365,8 @@ abstract class _AppState implements AppState {
   ExportingStatus get exportingStatus;
   @override
   ImportingStatus get importingStatus;
+  @override
+  AuthenticationStatus get authenticationStatus;
   @override
   String? get importMessage;
   @override
