@@ -57,7 +57,7 @@ class TransactionsView extends StatelessWidget {
                               index: index + 1,
                               onDelete: (transaction) {
                                 context.read<TransactionsBloc>().add(
-                                      TransactionsEvent.delete(transaction.id),
+                                      TransactionsEvent.delete(transaction),
                                     );
                               },
                             );

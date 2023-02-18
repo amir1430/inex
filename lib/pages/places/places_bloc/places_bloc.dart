@@ -1,21 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:inex/data_source/data_source.dart';
 import 'package:inex/data_source/model/place.dart';
 import 'package:inex/exceptions/exceptions.dart';
+import 'package:inex/repository/repository.dart';
 
 part 'places_event.dart';
 part 'places_state.dart';
 part 'places_bloc.freezed.dart';
 
 class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
-  PlacesBloc(this.dataSource) : super(const PlacesState()) {
+  PlacesBloc({
+    required this.repository,
+  }) : super(const PlacesState()) {
     on<_Started>(_onStarted);
     on<_Add>(_onAdd);
     on<_Remove>(_onRemove);
   }
 
-  final IDataSource dataSource;
+  final Repository repository;
 
   Future<void> _onStarted(
     _Started event,
@@ -23,7 +27,7 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
   ) async {
     emit(state.copyWith(stateStatus: PlacesStateStatus.inProgress));
     await emit.forEach(
-      dataSource.placesStream,
+      repository.placesStream,
       onData: (data) {
         return state.copyWith(
           places: data,
@@ -49,13 +53,15 @@ class PlacesBloc extends Bloc<PlacesEvent, PlacesState> {
     Emitter<PlacesState> emit,
   ) async {
     try {
-      await dataSource.deletePlace(event.id);
-    } on InexException catch (e) {
+      await repository.deletePlace(id: event.id);
+    } on DataSourceHaveDependencyException {
       emit(
         state.copyWith(
-          errorMessage: e.message,
+          errorMessage: 'This place have transactions. Remove them first',
         ),
       );
+    } catch (e) {
+      log(e.toString());
     } finally {
       await Future<void>.delayed(const Duration(milliseconds: 200));
       emit(state.copyWith(errorMessage: null));

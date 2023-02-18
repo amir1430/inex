@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inex/pages/places/places.dart';
+import 'package:inex/utils/extentions.dart';
 import 'package:inex/widgets/widgets.dart';
 
 class PlacesView extends StatelessWidget {
@@ -10,30 +11,21 @@ class PlacesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<PlacesBloc, PlacesState>(
-      // listenWhen: (previous, current) =>
-      //     previous.errorMessage != null &&
-      //     previous.errorMessage != current.errorMessage,
+      listenWhen: (previous, current) =>
+          current.stateStatus == PlacesStateStatus.failure ||
+          current.errorMessage != null,
       listener: (context, state) {
-        if (state.stateStatus == PlacesStateStatus.failure) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errorMessage ?? '')));
-        }
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.errorMessage ?? '')));
       },
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add_location_alt_outlined),
           onPressed: () {
-            showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
+            context.showModal(
               useRootNavigator: true,
-              builder: (context) {
-                return Padding(
-                  padding: MediaQuery.of(context).viewInsets,
-                  child: const AddPlaceView(),
-                );
-              },
+              child: const AddPlaceView(),
             );
           },
         ),
@@ -61,14 +53,11 @@ class PlacesView extends StatelessWidget {
                       leading: IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          showModalBottomSheet<void>(
-                            context: context,
+                          context.showModal(
                             useRootNavigator: true,
-                            builder: (context) {
-                              return AddPlaceView(
-                                place: place,
-                              );
-                            },
+                            child: AddPlaceView(
+                              place: place,
+                            ),
                           );
                         },
                       ),

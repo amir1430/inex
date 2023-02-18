@@ -1,12 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 
 part 'place.g.dart';
 
-@JsonSerializable()
 @CopyWith()
 @Collection(ignore: {'props'})
 class Place with EquatableMixin {
@@ -14,21 +11,41 @@ class Place with EquatableMixin {
     required this.name,
     required this.createdAt,
     required this.editedAt,
+    required this.id,
     this.description = '',
-  }) : id = Isar.autoIncrement;
+  });
 
-  Id id;
+  factory Place.fromJson(Map<String, dynamic> json) {
+    return Place(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      createdAt: json['created_at'] as int,
+      editedAt: json['edited_at'] as int,
+      description: json['description'] as String,
+    );
+  }
 
-  @Index(unique: true)
+  final Id id;
+
+  @Index(unique: true, replace: true)
   final String name;
+
   final int createdAt;
   final int editedAt;
   final String description;
 
-  factory Place.fromJson(Map<String, dynamic> json) => _$PlaceFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PlaceToJson(this);
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'name': name,
+      'created_at': createdAt,
+      'edited_at': editedAt,
+      'description': description,
+      'id': id,
+    };
+  }
 
   @override
-  List<Object> get props => [name, createdAt, editedAt, description];
+  List<Object> get props {
+    return [name, createdAt, editedAt, description];
+  }
 }

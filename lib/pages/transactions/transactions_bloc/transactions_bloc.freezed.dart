@@ -19,19 +19,19 @@ mixin _$TransactionsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(int id) delete,
+    required TResult Function(Transaction transaction) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(int id)? delete,
+    TResult? Function(Transaction transaction)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(int id)? delete,
+    TResult Function(Transaction transaction)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -112,7 +112,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(int id) delete,
+    required TResult Function(Transaction transaction) delete,
   }) {
     return started();
   }
@@ -121,7 +121,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(int id)? delete,
+    TResult? Function(Transaction transaction)? delete,
   }) {
     return started?.call();
   }
@@ -130,7 +130,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(int id)? delete,
+    TResult Function(Transaction transaction)? delete,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -180,7 +180,7 @@ abstract class _$$_DeleteCopyWith<$Res> {
   factory _$$_DeleteCopyWith(_$_Delete value, $Res Function(_$_Delete) then) =
       __$$_DeleteCopyWithImpl<$Res>;
   @useResult
-  $Res call({int id});
+  $Res call({Transaction transaction});
 }
 
 /// @nodoc
@@ -193,13 +193,13 @@ class __$$_DeleteCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? transaction = null,
   }) {
     return _then(_$_Delete(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == transaction
+          ? _value.transaction
+          : transaction // ignore: cast_nullable_to_non_nullable
+              as Transaction,
     ));
   }
 }
@@ -207,14 +207,14 @@ class __$$_DeleteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Delete implements _Delete {
-  const _$_Delete(this.id);
+  const _$_Delete(this.transaction);
 
   @override
-  final int id;
+  final Transaction transaction;
 
   @override
   String toString() {
-    return 'TransactionsEvent.delete(id: $id)';
+    return 'TransactionsEvent.delete(transaction: $transaction)';
   }
 
   @override
@@ -222,11 +222,12 @@ class _$_Delete implements _Delete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Delete &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.transaction, transaction) ||
+                other.transaction == transaction));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, transaction);
 
   @JsonKey(ignore: true)
   @override
@@ -238,29 +239,29 @@ class _$_Delete implements _Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(int id) delete,
+    required TResult Function(Transaction transaction) delete,
   }) {
-    return delete(id);
+    return delete(transaction);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(int id)? delete,
+    TResult? Function(Transaction transaction)? delete,
   }) {
-    return delete?.call(id);
+    return delete?.call(transaction);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(int id)? delete,
+    TResult Function(Transaction transaction)? delete,
     required TResult orElse(),
   }) {
     if (delete != null) {
-      return delete(id);
+      return delete(transaction);
     }
     return orElse();
   }
@@ -298,9 +299,9 @@ class _$_Delete implements _Delete {
 }
 
 abstract class _Delete implements TransactionsEvent {
-  const factory _Delete(final int id) = _$_Delete;
+  const factory _Delete(final Transaction transaction) = _$_Delete;
 
-  int get id;
+  Transaction get transaction;
   @JsonKey(ignore: true)
   _$$_DeleteCopyWith<_$_Delete> get copyWith =>
       throw _privateConstructorUsedError;

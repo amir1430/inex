@@ -13,6 +13,8 @@ abstract class _$PlaceCWProxy {
 
   Place editedAt(int editedAt);
 
+  Place id(int id);
+
   Place description(String description);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Place(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -25,6 +27,7 @@ abstract class _$PlaceCWProxy {
     String? name,
     int? createdAt,
     int? editedAt,
+    int? id,
     String? description,
   });
 }
@@ -45,6 +48,9 @@ class _$PlaceCWProxyImpl implements _$PlaceCWProxy {
   Place editedAt(int editedAt) => this(editedAt: editedAt);
 
   @override
+  Place id(int id) => this(id: id);
+
+  @override
   Place description(String description) => this(description: description);
 
   @override
@@ -59,6 +65,7 @@ class _$PlaceCWProxyImpl implements _$PlaceCWProxy {
     Object? name = const $CopyWithPlaceholder(),
     Object? createdAt = const $CopyWithPlaceholder(),
     Object? editedAt = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
     Object? description = const $CopyWithPlaceholder(),
   }) {
     return Place(
@@ -77,6 +84,11 @@ class _$PlaceCWProxyImpl implements _$PlaceCWProxy {
           ? _value.editedAt!
           // ignore: cast_nullable_to_non_nullable
           : editedAt as int,
+      id: id == const $CopyWithPlaceholder() || id == null
+          // ignore: unnecessary_non_null_assertion
+          ? _value.id!
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
       description:
           description == const $CopyWithPlaceholder() || description == null
               // ignore: unnecessary_non_null_assertion
@@ -149,7 +161,7 @@ const PlaceSchema = CollectionSchema(
       id: 879695947855722453,
       name: r'name',
       unique: true,
-      replace: false,
+      replace: true,
       properties: [
         IndexPropertySchema(
           name: r'name',
@@ -202,9 +214,9 @@ Place _placeDeserialize(
     createdAt: reader.readLong(offsets[0]),
     description: reader.readStringOrNull(offsets[1]) ?? '',
     editedAt: reader.readLong(offsets[2]),
+    id: id,
     name: reader.readString(offsets[4]),
   );
-  object.id = id;
   return object;
 }
 
@@ -240,9 +252,7 @@ List<IsarLinkBase<dynamic>> _placeGetLinks(Place object) {
   return [];
 }
 
-void _placeAttach(IsarCollection<dynamic> col, Id id, Place object) {
-  object.id = id;
-}
+void _placeAttach(IsarCollection<dynamic> col, Id id, Place object) {}
 
 extension PlaceByIndex on IsarCollection<Place> {
   Future<Place?> getByName(String name) {
@@ -1158,22 +1168,3 @@ extension PlaceQueryProperty on QueryBuilder<Place, Place, QQueryProperty> {
     });
   }
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-Place _$PlaceFromJson(Map<String, dynamic> json) => Place(
-      name: json['name'] as String,
-      createdAt: json['createdAt'] as int,
-      editedAt: json['editedAt'] as int,
-      description: json['description'] as String? ?? '',
-    )..id = json['id'] as int;
-
-Map<String, dynamic> _$PlaceToJson(Place instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'createdAt': instance.createdAt,
-      'editedAt': instance.editedAt,
-      'description': instance.description,
-    };

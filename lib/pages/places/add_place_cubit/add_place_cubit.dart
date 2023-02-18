@@ -2,16 +2,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:inex/data_form/data_form.dart';
-import 'package:inex/data_source/data_source.dart';
 import 'package:inex/data_source/model/place.dart';
+import 'package:inex/repository/repository.dart';
 
 part 'add_place_state.dart';
 part 'add_place_cubit.freezed.dart';
 
 class AddPlaceCubit extends Cubit<AddPlaceState> {
   AddPlaceCubit({
-    required this.dataSource,
-    this.place,
+    required this.repository,
+    Place? place,
   }) : super(
           AddPlaceState(
             id: place?.id,
@@ -21,8 +21,7 @@ class AddPlaceCubit extends Cubit<AddPlaceState> {
           ),
         );
 
-  final IDataSource dataSource;
-  final Place? place;
+  final Repository repository;
 
   void changeName(String value) {
     final newName = NameForm.dirty(value);
@@ -48,8 +47,9 @@ class AddPlaceCubit extends Cubit<AddPlaceState> {
     final now = DateTime.now().millisecondsSinceEpoch;
     emit(state.copyWith(formzStatus: FormzStatus.submissionInProgress));
     try {
-      await dataSource.addPlace(
-        Place(
+      await repository.addPlace(
+        place: Place(
+          id: DateTime.now().millisecondsSinceEpoch,
           name: state.nameForm.value,
           description: state.descriptionForm.value,
           createdAt: now,
@@ -70,12 +70,13 @@ class AddPlaceCubit extends Cubit<AddPlaceState> {
   Future<void> updateFrom(Place place) async {
     emit(state.copyWith(formzStatus: FormzStatus.submissionInProgress));
     try {
-      await dataSource.addPlace(
-        place.copyWith(
+      await repository.addPlace(
+        place: place.copyWith(
           editedAt: DateTime.now().millisecondsSinceEpoch,
           name: state.nameForm.value,
           description: state.descriptionForm.value,
-        )..id = state.id!,
+          id: state.id,
+        ),
       );
       emit(state.copyWith(formzStatus: FormzStatus.submissionSuccess));
     } catch (e) {
