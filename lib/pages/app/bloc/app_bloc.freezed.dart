@@ -20,6 +20,7 @@ mixin _$AppEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -31,6 +32,7 @@ mixin _$AppEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -42,6 +44,7 @@ mixin _$AppEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -54,6 +57,7 @@ mixin _$AppEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -65,6 +69,7 @@ mixin _$AppEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -76,6 +81,7 @@ mixin _$AppEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -142,6 +148,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -156,6 +163,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -170,6 +178,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -188,6 +197,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -202,6 +212,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -216,6 +227,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -273,6 +285,7 @@ class _$_SignOut implements _SignOut {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -287,6 +300,7 @@ class _$_SignOut implements _SignOut {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -301,6 +315,7 @@ class _$_SignOut implements _SignOut {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -319,6 +334,7 @@ class _$_SignOut implements _SignOut {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -333,6 +349,7 @@ class _$_SignOut implements _SignOut {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -347,6 +364,7 @@ class _$_SignOut implements _SignOut {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -363,6 +381,174 @@ class _$_SignOut implements _SignOut {
 
 abstract class _SignOut implements AppEvent {
   const factory _SignOut() = _$_SignOut;
+}
+
+/// @nodoc
+abstract class _$$_SyncingCopyWith<$Res> {
+  factory _$$_SyncingCopyWith(
+          _$_Syncing value, $Res Function(_$_Syncing) then) =
+      __$$_SyncingCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userUid});
+}
+
+/// @nodoc
+class __$$_SyncingCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$_Syncing>
+    implements _$$_SyncingCopyWith<$Res> {
+  __$$_SyncingCopyWithImpl(_$_Syncing _value, $Res Function(_$_Syncing) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userUid = null,
+  }) {
+    return _then(_$_Syncing(
+      userUid: null == userUid
+          ? _value.userUid
+          : userUid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Syncing implements _Syncing {
+  const _$_Syncing({required this.userUid});
+
+  @override
+  final String userUid;
+
+  @override
+  String toString() {
+    return 'AppEvent.syncing(userUid: $userUid)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Syncing &&
+            (identical(other.userUid, userUid) || other.userUid == userUid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userUid);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SyncingCopyWith<_$_Syncing> get copyWith =>
+      __$$_SyncingCopyWithImpl<_$_Syncing>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
+    required TResult Function() share,
+    required TResult Function() import,
+    required TResult Function() export,
+    required TResult Function(bool isDark) changeTheme,
+    required TResult Function(CurrencyFormat format) changeCurrenyFormat,
+  }) {
+    return syncing(userUid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
+    TResult? Function()? share,
+    TResult? Function()? import,
+    TResult? Function()? export,
+    TResult? Function(bool isDark)? changeTheme,
+    TResult? Function(CurrencyFormat format)? changeCurrenyFormat,
+  }) {
+    return syncing?.call(userUid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
+    TResult Function()? share,
+    TResult Function()? import,
+    TResult Function()? export,
+    TResult Function(bool isDark)? changeTheme,
+    TResult Function(CurrencyFormat format)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (syncing != null) {
+      return syncing(userUid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
+    required TResult Function(_Share value) share,
+    required TResult Function(_Import value) import,
+    required TResult Function(_Export value) export,
+    required TResult Function(_ChangeTheme value) changeTheme,
+    required TResult Function(_ChangeCurrenyFormat value) changeCurrenyFormat,
+  }) {
+    return syncing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
+    TResult? Function(_Share value)? share,
+    TResult? Function(_Import value)? import,
+    TResult? Function(_Export value)? export,
+    TResult? Function(_ChangeTheme value)? changeTheme,
+    TResult? Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+  }) {
+    return syncing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
+    TResult Function(_Share value)? share,
+    TResult Function(_Import value)? import,
+    TResult Function(_Export value)? export,
+    TResult Function(_ChangeTheme value)? changeTheme,
+    TResult Function(_ChangeCurrenyFormat value)? changeCurrenyFormat,
+    required TResult orElse(),
+  }) {
+    if (syncing != null) {
+      return syncing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Syncing implements AppEvent {
+  const factory _Syncing({required final String userUid}) = _$_Syncing;
+
+  String get userUid;
+  @JsonKey(ignore: true)
+  _$$_SyncingCopyWith<_$_Syncing> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -403,6 +589,7 @@ class _$_Share implements _Share {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -417,6 +604,7 @@ class _$_Share implements _Share {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -431,6 +619,7 @@ class _$_Share implements _Share {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -449,6 +638,7 @@ class _$_Share implements _Share {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -463,6 +653,7 @@ class _$_Share implements _Share {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -477,6 +668,7 @@ class _$_Share implements _Share {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -533,6 +725,7 @@ class _$_Import implements _Import {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -547,6 +740,7 @@ class _$_Import implements _Import {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -561,6 +755,7 @@ class _$_Import implements _Import {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -579,6 +774,7 @@ class _$_Import implements _Import {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -593,6 +789,7 @@ class _$_Import implements _Import {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -607,6 +804,7 @@ class _$_Import implements _Import {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -663,6 +861,7 @@ class _$_Export implements _Export {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -677,6 +876,7 @@ class _$_Export implements _Export {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -691,6 +891,7 @@ class _$_Export implements _Export {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -709,6 +910,7 @@ class _$_Export implements _Export {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -723,6 +925,7 @@ class _$_Export implements _Export {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -737,6 +940,7 @@ class _$_Export implements _Export {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -821,6 +1025,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -835,6 +1040,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -849,6 +1055,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -867,6 +1074,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -881,6 +1089,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -895,6 +1104,7 @@ class _$_ChangeTheme implements _ChangeTheme {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -985,6 +1195,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() signOut,
+    required TResult Function(String userUid) syncing,
     required TResult Function() share,
     required TResult Function() import,
     required TResult Function() export,
@@ -999,6 +1210,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? signOut,
+    TResult? Function(String userUid)? syncing,
     TResult? Function()? share,
     TResult? Function()? import,
     TResult? Function()? export,
@@ -1013,6 +1225,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? signOut,
+    TResult Function(String userUid)? syncing,
     TResult Function()? share,
     TResult Function()? import,
     TResult Function()? export,
@@ -1031,6 +1244,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignOut value) signOut,
+    required TResult Function(_Syncing value) syncing,
     required TResult Function(_Share value) share,
     required TResult Function(_Import value) import,
     required TResult Function(_Export value) export,
@@ -1045,6 +1259,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_SignOut value)? signOut,
+    TResult? Function(_Syncing value)? syncing,
     TResult? Function(_Share value)? share,
     TResult? Function(_Import value)? import,
     TResult? Function(_Export value)? export,
@@ -1059,6 +1274,7 @@ class _$_ChangeCurrenyFormat implements _ChangeCurrenyFormat {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignOut value)? signOut,
+    TResult Function(_Syncing value)? syncing,
     TResult Function(_Share value)? share,
     TResult Function(_Import value)? import,
     TResult Function(_Export value)? export,
@@ -1086,6 +1302,7 @@ abstract class _ChangeCurrenyFormat implements AppEvent {
 /// @nodoc
 mixin _$AppState {
   bool get isThemeDark => throw _privateConstructorUsedError;
+  SyncingStatus get syncingStatus => throw _privateConstructorUsedError;
   CurrencyFormat get currencyFormat => throw _privateConstructorUsedError;
   ExportingStatus get exportingStatus => throw _privateConstructorUsedError;
   ImportingStatus get importingStatus => throw _privateConstructorUsedError;
@@ -1107,6 +1324,7 @@ abstract class $AppStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isThemeDark,
+      SyncingStatus syncingStatus,
       CurrencyFormat currencyFormat,
       ExportingStatus exportingStatus,
       ImportingStatus importingStatus,
@@ -1132,6 +1350,7 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
   @override
   $Res call({
     Object? isThemeDark = null,
+    Object? syncingStatus = null,
     Object? currencyFormat = null,
     Object? exportingStatus = null,
     Object? importingStatus = null,
@@ -1145,6 +1364,10 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
           ? _value.isThemeDark
           : isThemeDark // ignore: cast_nullable_to_non_nullable
               as bool,
+      syncingStatus: null == syncingStatus
+          ? _value.syncingStatus
+          : syncingStatus // ignore: cast_nullable_to_non_nullable
+              as SyncingStatus,
       currencyFormat: null == currencyFormat
           ? _value.currencyFormat
           : currencyFormat // ignore: cast_nullable_to_non_nullable
@@ -1195,6 +1418,7 @@ abstract class _$$_AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isThemeDark,
+      SyncingStatus syncingStatus,
       CurrencyFormat currencyFormat,
       ExportingStatus exportingStatus,
       ImportingStatus importingStatus,
@@ -1219,6 +1443,7 @@ class __$$_AppStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isThemeDark = null,
+    Object? syncingStatus = null,
     Object? currencyFormat = null,
     Object? exportingStatus = null,
     Object? importingStatus = null,
@@ -1232,6 +1457,10 @@ class __$$_AppStateCopyWithImpl<$Res>
           ? _value.isThemeDark
           : isThemeDark // ignore: cast_nullable_to_non_nullable
               as bool,
+      syncingStatus: null == syncingStatus
+          ? _value.syncingStatus
+          : syncingStatus // ignore: cast_nullable_to_non_nullable
+              as SyncingStatus,
       currencyFormat: null == currencyFormat
           ? _value.currencyFormat
           : currencyFormat // ignore: cast_nullable_to_non_nullable
@@ -1269,6 +1498,7 @@ class __$$_AppStateCopyWithImpl<$Res>
 class _$_AppState implements _AppState {
   const _$_AppState(
       {this.isThemeDark = false,
+      this.syncingStatus = SyncingStatus.initial,
       this.currencyFormat = CurrencyFormat.iranRial,
       this.exportingStatus = ExportingStatus.initial,
       this.importingStatus = ImportingStatus.initial,
@@ -1280,6 +1510,9 @@ class _$_AppState implements _AppState {
   @override
   @JsonKey()
   final bool isThemeDark;
+  @override
+  @JsonKey()
+  final SyncingStatus syncingStatus;
   @override
   @JsonKey()
   final CurrencyFormat currencyFormat;
@@ -1301,7 +1534,7 @@ class _$_AppState implements _AppState {
 
   @override
   String toString() {
-    return 'AppState(isThemeDark: $isThemeDark, currencyFormat: $currencyFormat, exportingStatus: $exportingStatus, importingStatus: $importingStatus, authenticationStatus: $authenticationStatus, importMessage: $importMessage, exportPath: $exportPath, errorMessage: $errorMessage)';
+    return 'AppState(isThemeDark: $isThemeDark, syncingStatus: $syncingStatus, currencyFormat: $currencyFormat, exportingStatus: $exportingStatus, importingStatus: $importingStatus, authenticationStatus: $authenticationStatus, importMessage: $importMessage, exportPath: $exportPath, errorMessage: $errorMessage)';
   }
 
   @override
@@ -1311,6 +1544,8 @@ class _$_AppState implements _AppState {
             other is _$_AppState &&
             (identical(other.isThemeDark, isThemeDark) ||
                 other.isThemeDark == isThemeDark) &&
+            (identical(other.syncingStatus, syncingStatus) ||
+                other.syncingStatus == syncingStatus) &&
             (identical(other.currencyFormat, currencyFormat) ||
                 other.currencyFormat == currencyFormat) &&
             (identical(other.exportingStatus, exportingStatus) ||
@@ -1331,6 +1566,7 @@ class _$_AppState implements _AppState {
   int get hashCode => Object.hash(
       runtimeType,
       isThemeDark,
+      syncingStatus,
       currencyFormat,
       exportingStatus,
       importingStatus,
@@ -1349,6 +1585,7 @@ class _$_AppState implements _AppState {
 abstract class _AppState implements AppState {
   const factory _AppState(
       {final bool isThemeDark,
+      final SyncingStatus syncingStatus,
       final CurrencyFormat currencyFormat,
       final ExportingStatus exportingStatus,
       final ImportingStatus importingStatus,
@@ -1359,6 +1596,8 @@ abstract class _AppState implements AppState {
 
   @override
   bool get isThemeDark;
+  @override
+  SyncingStatus get syncingStatus;
   @override
   CurrencyFormat get currencyFormat;
   @override

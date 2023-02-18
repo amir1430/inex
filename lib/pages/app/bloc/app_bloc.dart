@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:inex/data_source/data_source.dart';
 import 'package:inex/exceptions/exceptions.dart';
+import 'package:inex/repository/repository.dart';
 import 'package:inex/utils/currency_format.dart';
 import 'package:inex/utils/time.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,22 +21,11 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
     required this.dataSource,
     required this.ioDataSource,
     required this.authenticationDataSource,
+    required this.repository,
   }) : super(const AppState()) {
-    on<_Started>(
-      (event, emit) async {
-        await emit.forEach(
-          authenticationDataSource.authStatus(),
-          onData: (data) {
-            return state.copyWith(authenticationStatus: data);
-          },
-        );
-      },
-    );
-    on<_SignOut>(
-      (event, emit) async {
-        await authenticationDataSource.logOut();
-      },
-    );
+    on<_Started>(_onStarted);
+    on<_Syncing>(_onSyncing);
+    on<_SignOut>(_onSignOut);
     on<_Share>(_onShare);
     on<_Import>(_onImport);
     on<_Export>(_onExport);
@@ -43,9 +33,47 @@ class AppBloc extends HydratedBloc<AppEvent, AppState> {
     on<_ChangeCurrenyFormat>(_onChangeCurrenyFormat);
   }
 
+  final Repository repository;
+
   final IDataSource dataSource;
   final IIoDataSource ioDataSource;
   final AuthenticationDataSource authenticationDataSource;
+
+  Future<void> _onStarted(
+    _Started event,
+    Emitter<AppState> emit,
+  ) async {
+    await emit.forEach(
+      authenticationDataSource.authStatus(),
+      onData: (status) {
+        status.whenOrNull(
+          authenticated: (user) {
+            add(_Syncing(userUid: user.uuid));
+          },
+        );
+        return state.copyWith(authenticationStatus: status);
+      },
+    );
+  }
+
+  Future<void> _onSignOut(
+    _SignOut event,
+    Emitter<AppState> emit,
+  ) async {
+    await authenticationDataSource.logOut();
+  }
+
+  Future<void> _onSyncing(
+    _Syncing event,
+    Emitter<AppState> emit,
+  ) async {
+    await emit.forEach(
+      repository.syncingStatus,
+      onData: (data) {
+        return state.copyWith(syncingStatus: data);
+      },
+    );
+  }
 
   Future<void> _onShare(
     _Share event,
