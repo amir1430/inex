@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:inex/data_form/data_form.dart';
-import 'package:inex/data_source/data_source.dart';
 import 'package:inex/data_source/model/transaction.dart';
 import 'package:inex/exceptions/exceptions.dart';
+import 'package:inex/repository/repository.dart';
 import 'package:intl/intl.dart';
 part 'add_transaction_state.dart';
 part 'add_transaction_cubit.freezed.dart';
 
 class AddTransactionCubit extends Cubit<AddTransactionState> {
   AddTransactionCubit({
-    required this.dataSource,
     required this.placeId,
+    required this.repository,
     String? date,
   }) : super(
           AddTransactionState(
@@ -23,19 +23,19 @@ class AddTransactionCubit extends Cubit<AddTransactionState> {
           ),
         );
 
-  final IDataSource dataSource;
+  final Repository repository;
   final int placeId;
 
   Future<void> add() async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
-      final place = await dataSource.place(id: placeId);
+      final place = await repository.getLocalPlace(id: placeId);
 
       if (place == null) {
         throw const InexException(message: 'invalid place');
       }
 
-      await dataSource.addtransaction(
+      await repository.addTransaction(
         transaction: Transaction(
           id: DateTime.now().microsecondsSinceEpoch,
           time: convertDateTimeToUnix(date: state.date, time: state.timeOfDay),

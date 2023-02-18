@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:inex/data_source/data_source.dart';
 import 'package:inex/data_source/model/transaction.dart';
+import 'package:inex/repository/repository.dart';
 import 'package:inex/utils/utils.dart';
 
 part 'transactions_event.dart';
@@ -11,13 +11,13 @@ part 'transactions_state.dart';
 part 'transactions_bloc.freezed.dart';
 
 class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
-  TransactionsBloc({required this.dataSource})
+  TransactionsBloc({required this.repository})
       : super(const TransactionsState()) {
     on<_Started>(_onStarted);
     on<_Delete>(_onDelete);
   }
 
-  final IDataSource dataSource;
+  final Repository repository;
 
   Future<void> _onStarted(
     _Started event,
@@ -26,7 +26,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     emit(state.copyWith(status: TransactionsStatus.inProgress));
 
     await emit.forEach(
-      dataSource.transactionsStream(),
+      repository.transactionsStream(),
       onData: (data) {
         return state.copyWith(
           status: TransactionsStatus.success,
@@ -41,7 +41,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     Emitter<TransactionsState> emit,
   ) async {
     try {
-      await dataSource.deleteTransaction(event.id);
+      await repository.deleteTransaction(transaction: event.transaction);
     } catch (e) {
       log(e.toString());
     }
