@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:inex/data_source/model/inex_user.dart';
 import 'package:inex/exceptions/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -10,12 +11,13 @@ part 'authentication_data_source.freezed.dart';
 class AuthenticationStatus with _$AuthenticationStatus {
   const factory AuthenticationStatus.initial() = _Initial;
   const factory AuthenticationStatus.authenticated({
-    required String email,
+    required InexUser user,
   }) = _Authenticated;
   const factory AuthenticationStatus.unAuthenticated() = _UnAuthenticated;
 }
 
 abstract class AuthenticationDataSource {
+  InexUser? get currentUser;
   Stream<AuthenticationStatus> authStatus();
   Future<void> loginWithEmail({
     required String email,
@@ -28,10 +30,21 @@ abstract class AuthenticationDataSource {
   Future<void> logOut();
 }
 
-class SupaBaseDataSource implements AuthenticationDataSource {
-  const SupaBaseDataSource({required this.supabase});
+class SupaBaseAuthDataSource implements AuthenticationDataSource {
+  const SupaBaseAuthDataSource({required this.supabase});
 
   final Supabase supabase;
+
+  @override
+  InexUser? get currentUser {
+    if (supabase.client.auth.currentSession == null) {
+      return null;
+    }
+    return InexUser(
+      email: supabase.client.auth.currentSession!.user.email ?? '',
+      uuid: supabase.client.auth.currentSession!.user.id,
+    );
+  }
 
   @override
   Stream<AuthenticationStatus> authStatus() async* {
@@ -81,7 +94,10 @@ class SupaBaseDataSource implements AuthenticationDataSource {
         } else {
           sink.add(
             AuthenticationStatus.authenticated(
-              email: data.session!.user.email ?? '',
+              user: InexUser(
+                email: data.session!.user.email ?? '',
+                uuid: data.session!.user.id,
+              ),
             ),
           );
         }

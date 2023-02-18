@@ -19,21 +19,21 @@ mixin _$AuthenticationStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String email) authenticated,
+    required TResult Function(InexUser user) authenticated,
     required TResult Function() unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String email)? authenticated,
+    TResult? Function(InexUser user)? authenticated,
     TResult? Function()? unAuthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String email)? authenticated,
+    TResult Function(InexUser user)? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) =>
@@ -119,7 +119,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String email) authenticated,
+    required TResult Function(InexUser user) authenticated,
     required TResult Function() unAuthenticated,
   }) {
     return initial();
@@ -129,7 +129,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String email)? authenticated,
+    TResult? Function(InexUser user)? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
     return initial?.call();
@@ -139,7 +139,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String email)? authenticated,
+    TResult Function(InexUser user)? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) {
@@ -194,7 +194,7 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
           _$_Authenticated value, $Res Function(_$_Authenticated) then) =
       __$$_AuthenticatedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email});
+  $Res call({InexUser user});
 }
 
 /// @nodoc
@@ -208,13 +208,13 @@ class __$$_AuthenticatedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? user = null,
   }) {
     return _then(_$_Authenticated(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as InexUser,
     ));
   }
 }
@@ -222,14 +222,14 @@ class __$$_AuthenticatedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Authenticated implements _Authenticated {
-  const _$_Authenticated({required this.email});
+  const _$_Authenticated({required this.user});
 
   @override
-  final String email;
+  final InexUser user;
 
   @override
   String toString() {
-    return 'AuthenticationStatus.authenticated(email: $email)';
+    return 'AuthenticationStatus.authenticated(user: $user)';
   }
 
   @override
@@ -237,11 +237,11 @@ class _$_Authenticated implements _Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Authenticated &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
@@ -253,32 +253,32 @@ class _$_Authenticated implements _Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String email) authenticated,
+    required TResult Function(InexUser user) authenticated,
     required TResult Function() unAuthenticated,
   }) {
-    return authenticated(email);
+    return authenticated(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String email)? authenticated,
+    TResult? Function(InexUser user)? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
-    return authenticated?.call(email);
+    return authenticated?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String email)? authenticated,
+    TResult Function(InexUser user)? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(email);
+      return authenticated(user);
     }
     return orElse();
   }
@@ -319,10 +319,10 @@ class _$_Authenticated implements _Authenticated {
 }
 
 abstract class _Authenticated implements AuthenticationStatus {
-  const factory _Authenticated({required final String email}) =
+  const factory _Authenticated({required final InexUser user}) =
       _$_Authenticated;
 
-  String get email;
+  InexUser get user;
   @JsonKey(ignore: true)
   _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
       throw _privateConstructorUsedError;
@@ -367,7 +367,7 @@ class _$_UnAuthenticated implements _UnAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String email) authenticated,
+    required TResult Function(InexUser user) authenticated,
     required TResult Function() unAuthenticated,
   }) {
     return unAuthenticated();
@@ -377,7 +377,7 @@ class _$_UnAuthenticated implements _UnAuthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String email)? authenticated,
+    TResult? Function(InexUser user)? authenticated,
     TResult? Function()? unAuthenticated,
   }) {
     return unAuthenticated?.call();
@@ -387,7 +387,7 @@ class _$_UnAuthenticated implements _UnAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String email)? authenticated,
+    TResult Function(InexUser user)? authenticated,
     TResult Function()? unAuthenticated,
     required TResult orElse(),
   }) {
