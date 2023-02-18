@@ -188,6 +188,11 @@ class _Place extends StatelessWidget {
                       transaction: state.transactionsList[index],
                       index: index + 1,
                       currencyFormat: currency,
+                      onDelete: (transaction) {
+                        context
+                            .read<TransactionsBloc>()
+                            .add(TransactionsEvent.delete(transaction));
+                      },
                     );
                   },
                 );
