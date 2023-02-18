@@ -5,11 +5,12 @@ import 'package:inex/data_source/model/transaction.dart';
 import 'package:inex/exceptions/exceptions.dart';
 import 'package:isar/isar.dart';
 
-export 'io_data_source.dart';
 export 'authentication_data_source.dart';
+export 'io_data_source.dart';
 
 abstract class IDataSource {
   Future<int> addPlace(Place place);
+  Future<List<int>> addPlaces(List<Place> places);
   Future<bool> deletePlace(int id);
   Future<List<Place>> places();
   Stream<List<Place>> get placesStream;
@@ -19,6 +20,8 @@ abstract class IDataSource {
     required Transaction transaction,
     required Place place,
   });
+
+  Future<List<int>> addtransactions(List<Transaction> transactions);
   Stream<List<Transaction>> transactionsStream({int? placeId});
   Future<List<Transaction>> transactions({
     int? placeId,
@@ -34,6 +37,8 @@ abstract class IDataSource {
   Future<bool> deleteTransaction(int id);
   Future<ImportingStatusCounter> import(Map<String, dynamic> json);
   Future<Map<String, dynamic>> export();
+
+  Future<void> clear();
 }
 
 class IsarDataSource implements IDataSource {
@@ -51,6 +56,15 @@ class IsarDataSource implements IDataSource {
       }
       throw Exception('$e');
     }
+  }
+
+  @override
+  Future<List<int>> addPlaces(
+    List<Place> places,
+  ) async {
+    return isar.writeTxn(
+      () => isar.places.putAll([...places]),
+    );
   }
 
   @override
@@ -102,6 +116,24 @@ class IsarDataSource implements IDataSource {
         await transaction.place.save();
         return id;
       });
+
+  @override
+  Future<List<int>> addtransactions(List<Transaction> transactions) async {
+    return isar.writeTxn(
+      () async {
+        var ids = <int>[];
+        for (final trx in transactions) {
+          if (trx.place.value != null &&
+              await place(id: trx.place.value!.id) != null) {
+            final id = await isar.transactions.put(trx);
+            ids = [...ids, id];
+            await trx.place.save();
+          }
+        }
+        return ids;
+      },
+    );
+  }
 
   @override
   Future<List<Transaction>> transactions({
@@ -222,20 +254,26 @@ class IsarDataSource implements IDataSource {
         for (final trx in transactions) {
           if (trx.place.value != null &&
               await place(id: trx.place.value!.id) != null) {
-            if (await transaction(id: trx.id) == null) {
-              await isar.transactions.put(trx);
-              await trx.place.save();
+            // if (await transaction(id: trx.id) == null) {
 
-              counter = counter.copyWith(
-                transactionsSuccessCount: counter.transactionsSuccessCount + 1,
-              );
-            }
+            // }
+            await isar.transactions.put(trx);
+            await trx.place.save();
+
+            counter = counter.copyWith(
+              transactionsSuccessCount: counter.transactionsSuccessCount + 1,
+            );
           }
         }
       },
     );
 
     return counter;
+  }
+
+  @override
+  Future<void> clear() async {
+    await isar.writeTxn(isar.clear);
   }
 }
 
