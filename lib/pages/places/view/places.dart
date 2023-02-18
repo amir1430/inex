@@ -12,13 +12,12 @@ class PlacesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<PlacesBloc, PlacesState>(
       listenWhen: (previous, current) =>
-          current.stateStatus == PlacesStateStatus.failure,
+          current.stateStatus == PlacesStateStatus.failure ||
+          current.errorMessage != null,
       listener: (context, state) {
-        if (state.stateStatus == PlacesStateStatus.failure) {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errorMessage ?? '')));
-        }
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.errorMessage ?? '')));
       },
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
