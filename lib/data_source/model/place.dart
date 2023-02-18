@@ -19,8 +19,8 @@ class Place with EquatableMixin {
     return Place(
       id: json['id'] as int,
       name: json['name'] as String,
-      createdAt: json['createdAt'] as int,
-      editedAt: json['editedAt'] as int,
+      createdAt: json['created_at'] as int,
+      editedAt: json['edited_at'] as int,
       description: json['description'] as String,
     );
   }
@@ -37,8 +37,8 @@ class Place with EquatableMixin {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'name': name,
-      'createdAt': createdAt,
-      'editedAt': editedAt,
+      'created_at': createdAt,
+      'edited_at': editedAt,
       'description': description,
       'id': id,
     };
