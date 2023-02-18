@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:inex/pages/app/app.dart';
 import 'package:inex/pages/authentication/authentication.dart';
+import 'package:inex/repository/repository.dart';
 import 'package:inex/utils/utils.dart';
+import 'package:inex/widgets/sync_rotation.dart';
 import 'package:inex/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
       label: 'Places',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.attach_money),
+      icon: Icon(Icons.money),
       label: 'Transactions',
     )
   ];
@@ -75,6 +77,19 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
         key: scaffoldKey,
         appBar: AppBar(
           title: const Text('Inex'),
+          actions: [
+            BlocBuilder<AppBloc, AppState>(
+              builder: (context, state) {
+                if (state.syncingStatus == SyncingStatus.inProgress) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: RotatingSyncIcon(),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            )
+          ],
         ),
         drawer: Drawer(
           child: Column(
@@ -170,12 +185,24 @@ class _HomePageState extends State<HomePage> with ScaffoldHelper {
                             ),
                           );
                         },
-                        authenticated: (email) {
+                        authenticated: (user) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Row(
                               children: [
-                                const Spacer(),
+                                CircleAvatar(
+                                  child: Center(
+                                    child: Text(user.email[0]),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    user.email,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                // const Spacer(),
                                 SizedBox(
                                   height: 46,
                                   width: 2,
